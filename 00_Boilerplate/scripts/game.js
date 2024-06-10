@@ -27,4 +27,12 @@ function showScore() {
     document.getElementById("score").innerText = game.score;
 }
 
-module.exports = { game, newGame, showScore };
+// Add lightson function with the ID of circ
+function lightsOn(circ) {
+    document.getElementById(circ).classList.add("light");
+    setTimeout(() => {
+        document.getElementById(circ).classList.remove("light");
+    }, 400);
+};
+
+module.exports = { game, newGame, showScore, addTurn, lightsOn };

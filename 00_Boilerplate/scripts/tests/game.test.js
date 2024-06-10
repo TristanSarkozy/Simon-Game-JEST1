@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { game, newGame, showScore, addTurn } = require("../game");
+const { game, newGame, showScore, addTurn, lightsOn } = require("../game");
 
 // Add Jest directive that runs before all tests are run
 // Add the node fs module, a file system handling module
@@ -57,5 +57,33 @@ describe("newGame works correctly", () => {
     });
     test("should display 0 for the element with id of score", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
+    });
+});
+
+// add describe section that contains a.. 
+describe("gameplay works correctly", () => {
+    // ..a beforeEach section to run before each test is run
+    beforeEach(() => {
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+        addTurn();
+    });
+    // ..a afterEach block to run after each test is run
+    afterEach(() => {
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+    });
+    // Add test to call addTurn again and check to see that there are now two elements
+    test("addTurn adds a new turn to the game", () => {
+        addTurn();
+        expect(game.currentGame.length).toBe(2);
+    });
+    // Add failing test to check if the light class has been added to button to light up
+    test("should add correct class to light up the buttons", () => {
+        let button = document.getElementById(game.currentGame[0]);
+        lightsOn(game.currentGame[0]);
+        expect(button.classList).toContain("light");
     });
 });
