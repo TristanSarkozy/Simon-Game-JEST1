@@ -20,14 +20,14 @@ function addTurn() {
     // ..to randomly add a button ID to the currentGame array 
     game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
     // .. to call showTurns() function
-    // showTurns();
+    showTurns();
 }
 
 function showScore() {
     document.getElementById("score").innerText = game.score;
 }
 
-// Add lightson function with the ID of circ
+// Add lightsOn function with the ID of circ
 function lightsOn(circ) {
     document.getElementById(circ).classList.add("light");
     setTimeout(() => {
@@ -35,4 +35,16 @@ function lightsOn(circ) {
     }, 400);
 };
 
-module.exports = { game, newGame, showScore, addTurn, lightsOn };
+// Add showTurns function to set interval turning the lightsOn.. 
+// ..increment the game turnNumber and turning them off again
+function showTurns() {
+    game.turnNumber = 0;
+    let turns = setInterval(() => {
+        lightsOn(game.currentGame[game.turnNumber]);
+        game.turnNumber++;
+        if (game.turnNumber >= game.currentGame.length) {
+            clearInterval(turns);
+        }
+    }, 800);
+}
+module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns };

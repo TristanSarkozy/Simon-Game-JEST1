@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { game, newGame, showScore, addTurn, lightsOn } = require("../game");
+const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("../game");
 
 // Add Jest directive that runs before all tests are run
 // Add the node fs module, a file system handling module
@@ -34,6 +34,10 @@ describe("game object contains correct keys", () => {
     // Add  a fifth test with buttons as an array
     test("choices contain correct ids", () => {
         expect(game.choices).toEqual(["button1", "button2", "button3", "button4"]);
+    });
+    // Add a sixth failing test to check if the turn number key exist
+    test("turnNumber key exist", () {
+        expect("turnNumber" in game).toBe(true);
     });
 });
 
@@ -85,5 +89,11 @@ describe("gameplay works correctly", () => {
         let button = document.getElementById(game.currentGame[0]);
         lightsOn(game.currentGame[0]);
         expect(button.classList).toContain("light");
+    });
+    // Add failing test so showTurns to update game TurnNumber
+    test("showTurns should update game.turnNumber", () => {
+        game.turnNumber = 42;
+        showTurns();
+        expect(game.turnNumber).toBe(0);
     });
 });
