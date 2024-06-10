@@ -2,8 +2,10 @@ let game = {
     score: 0,
     currentGame: [],
     playerMoves: [],
-    choices: ["button1", "button2", "button3", "button4"],
     turnNumber: 0,
+    lastButton: "",
+    turnInProgress: false,
+    choices: ["button1", "button2", "button3", "button4"],
 }
 
 function newGame() {
@@ -14,7 +16,8 @@ function newGame() {
         if (circle.getAttribute("data-listener") !== "true") {
             circle.addEventListener("click", (e) => {
                 // Add code to allow clicks if the length of currentGame array is > 0
-                if (game.currentGame.length > 0) {
+                // Add code so the click is disabled if a turn is in progress
+                if (game.currentGame.length > 0 && !game.turnInProgress) {
                     let move = e.target.getAttribute("id");
                     game.lastButton = move;
                     lightsOn(move);

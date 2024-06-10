@@ -38,9 +38,21 @@ describe("game object contains correct keys", () => {
     test("choices contain correct ids", () => {
         expect(game.choices).toEqual(["button1", "button2", "button3", "button4"]);
     });
-    // Add a sixth failing test to check if the turn number key exist
+    // Add a sixth failing test to check if the turn number key exists
     test("turnNumber key exist", () => {
         expect("turnNumber" in game).toBe(true);
+    });
+    // Add a seventh failing test to check if the lastButton exists
+    test("lastButton key exists", () => {
+        expect("lastButton" in game).toBe(true);
+    });
+    // Add test to check if the turnInProgress key exists
+    test("turnInProgress key exists", () => {
+        expect("turnInProgress" in game).toBe(true);
+    });
+    // Add test to check if turnInProgress key value is false
+    test("turnInProgress key value is false", () => {
+        expect("turnInProgress" in game).toBe(true);
     });
 });
 
@@ -123,5 +135,12 @@ describe("gameplay works correctly", () => {
     test("should toggle turnInProgress to  true", () => {
         showTurns();
         expect(game.turnInProgress).toBe(true);
-    })
+    });
+    // Add test to fail when clicking during computer sequence
+    test("clicking during computer sequence should fail", () => {
+        showTurns();
+        game.lastButton = "";
+        document.getElementById("button2").click();
+        expect(game.lastButton).toEqual("");
+    });
 });
