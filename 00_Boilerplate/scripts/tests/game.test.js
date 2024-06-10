@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { game, newGame, showScore } = require("../game");
+const { game, newGame, showScore, addTurn } = require("../game");
 
 // Add Jest directive that runs before all tests are run
 // Add the node fs module, a file system handling module
@@ -48,8 +48,9 @@ describe("newGame works correctly", () => {
     test("should set game score to zero", () => {
         expect(game.score).toEqual(0);
     });
-    test("should clear the computer sequence array", () => {
-        expect(game.currentGame.length).toBe(0);
+    // Add new test to check if it contains one element
+    test("should be one element in the computer's array", () => {
+        expect(game.currentGame.length).toBe(1);
     });
     test("should clear the player moves array", () => {
         expect(game.playerMoves.length).toBe(0);
