@@ -119,4 +119,9 @@ describe("gameplay works correctly", () => {
         // Add a matcher (toBeCalledWith)
         expect(window.alert).toBeCalledWith("Wrong move!!");
     });
+    // Add test to see if a turn is happening
+    test("should toggle turnInProgress to  true", () => {
+        showTurns();
+        expect(game.turnInProgress).toBe(true);
+    })
 });
